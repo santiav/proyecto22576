@@ -1,0 +1,46 @@
+[
+    {
+        "data": [
+            {
+                "id": "1",
+                "nombre": "MacBook Pro",
+                "precio": "1749",
+                "rutaImagen": "https://i.dummyjson.com/data/products/6/thumbnail.png",
+                "descripcion": "MacBook Pro 2021 with mini-LED display may launch between September, November",
+                "caracteristicas": "intel i5, 8gb ram",
+                "stock": "12",
+                "destacado": "1"
+            },
+            {
+                "id": "2",
+                "nombre": "Samsung Galaxy Book",
+                "precio": "1499",
+                "rutaImagen": "https://i.dummyjson.com/data/products/7/thumbnail.jpg",
+                "descripcion": "Samsung Galaxy Book S (2020) Laptop With Intel Lakefield Chip, 8GB of RAM Launched",
+                "caracteristicas": "intel i3, 8gb ram",
+                "stock": "27",
+                "destacado": "0"
+            },
+            {
+                "id": "3",
+                "nombre": "Microsoft Surface Laptop 4",
+                "precio": "1499",
+                "rutaImagen": "https://i.dummyjson.com/data/products/8/thumbnail.jpg",
+                "descripcion": "Style and speed. Stand out on HD video calls backed by Studio Mics. Capture ideas on the vibrant touchscreen.",
+                "caracteristicas": "intel i3, 4gb ram",
+                "stock": "19",
+                "destacado": "0"
+            },
+            {
+                "id": "4",
+                "nombre": "Infinix INBOOK",
+                "precio": "1099",
+                "rutaImagen": "https://i.dummyjson.com/data/products/9/thumbnail.jpg",
+                "descripcion": "Infinix Inbook X1 Ci3 10th 8GB 256GB 14 Win10 Grey – 1 Year Warranty",
+                "caracteristicas": "intel i3, 8gb ram",
+                "stock": "8",
+                "destacado": "1"
+            }
+        ]
+    }
+]
