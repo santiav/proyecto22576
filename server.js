@@ -4,6 +4,7 @@ const hbs = require('hbs');
 const path = require('path');
 const rutasFront = require('./routes/front.js')
 const rutasBack = require('./routes/back.js')
+require('./views/helpers/helpers.js')
 
 const port = 3000
 
@@ -18,7 +19,7 @@ hbs.registerPartials(__dirname + '/views/partials');
 app.use(express.static('public'));
 
 app.use('/', rutasFront)
-app.use('/back/', rutasBack)
+app.use('/', rutasBack)
 
 // 404
 app.use((req, res, next) => {
