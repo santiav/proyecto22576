@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-   {{> head}}
+    {{> head}}
 </head>
 
 <body>
@@ -22,20 +22,29 @@
 
                 <div class="row">
                     <!-- Contact Form -->
-                    <form action="/contacto" method="post" class="row mb-3 g-3 needs-validation col-md-6 mx-auto"
+                    <form action="https://formspree.io/f/mknenoqj" method="POST" class="row mb-3 g-3 needs-validation col-md-6 mx-auto"
                         id="contact-form" novalidate>
                         <div class="col-md-4">
+
                             <label for="nombre" class="form-label">Nombre</label>
                             <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre"
-                                name="nombre" required>
+                                name="nombre" pattern="[a-zA-Z]{3,20}" title="Debe tener por lo menos 5 caracteres, hasta un máximo de 20" required>
+
+                            <div class="valid-feedback">
+                                Está Ok tu nombre
+                            </div>
                             <div class="invalid-feedback">
                                 Escribe correctamente tu nombre
                             </div>
+
                         </div>
                         <div class="col-md-4">
                             <label for="email" class="form-label">E-mail</label>
                             <input type="email" class="form-control" name="email" id="email"
                                 placeholder="Ej: email@mail.com" required>
+                            <div class="valid-feedback">
+                                Está Ok tu e-mail
+                            </div>
                             <div class="invalid-feedback">
                                 Escribe correctamente tu e-mail
                             </div>
@@ -44,19 +53,27 @@
 
                         <div class="col-md-4">
                             <label for="asunto" class="form-label">Asunto</label>
+
                             <select class="form-select" name="asunto" id="asunto" required>
                                 <option selected disabled value="">Elegir...</option>
-                                <option>Comprar producto</option>
-                                <option>Otras consultas</option>
+                                <option value="comprar producto">Comprar producto</option>
+                                <option value="otras consultas">Otras consultas</option>
                             </select>
+
+                            <div class="valid-feedback">
+                                Buena elección
+                            </div>
                             <div class="invalid-feedback">
                                 Por favor elegir un asunto
                             </div>
                         </div>
                         <div class="col-12 mb-3">
                             <label for="mensaje" class="form-label">Textarea</label>
-                            <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Mensaje..."
-                                minlength="5" required></textarea>
+                            <textarea class="form-control" name="mensaje" id="mensaje" rows="5" placeholder="Mensaje..." minlength="5" required></textarea>
+
+                            <div class="valid-feedback">
+                                Está bien en la longitud de texto
+                            </div>
                             <div class="invalid-feedback">
                                 Por favor escribir un mensaje del menos 5 caracteres
                             </div>
@@ -88,6 +105,25 @@
     <script>
 
         // Validación
+        // Example starter JavaScript for disabling form submissions if there are invalid fields
+        (() => {
+            'use strict'
+
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            const forms = document.querySelectorAll('.needs-validation')
+
+            // Loop over them and prevent submission
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+        })()
 
     </script>
 
