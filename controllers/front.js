@@ -1,11 +1,20 @@
-const productos = require('../data/productos.json')
+// const productos = require('../data/productos.json')
+const db = require('../models/connection.js');
 
 
 const indexGET = (req, res) => {
-	res.render('index', {
-		titulo: "Mi página web",
-		productos: productos[0].data
+
+	let sql = "SELECT * FROM productos WHERE destacado = 1"
+
+	db.query(sql, (err,data) => {
+		if (err) throw err
+		console.log(data)
+		res.render('index', {
+			titulo: "Mi página web",
+			productos: data
+		})
 	})
+	
 }
 
 const comoComprarGET = (req, res) => {

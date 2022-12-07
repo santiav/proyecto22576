@@ -1,10 +1,20 @@
-const productos = require('../data/productos.json')
+// const productos = require('../data/productos.json')
+
+const db = require('../models/connection.js');
 
 const adminGET = (req, res) => {
-	res.render('admin', {
-		titulo: "Panel de control",
-		productos: productos[0].data
+
+	let sql = "SELECT * FROM productos"
+
+	db.query(sql, (err, data) => {
+		if (err) throw err
+		console.log(data)
+		res.render('admin', {
+			titulo: "Panel de control",
+			productos: data
+		})
 	})
+	
 }
 
 const agregarProductoGET =  (req, res) => {

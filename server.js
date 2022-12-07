@@ -5,6 +5,7 @@ const path = require('path');
 const rutasFront = require('./routes/front.js')
 const rutasBack = require('./routes/back.js')
 require('./views/helpers/helpers.js')
+require('dotenv').config()
 
 const port = 3000
 
