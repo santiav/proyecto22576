@@ -9,6 +9,13 @@ require('dotenv').config()
 
 const port = 3000
 
+// Para los formularios
+app.use(express.json());
+app.use(express.urlencoded({
+  extended: false
+}));
+
+
 app.set('view engine', 'hbs');
 app.set('views', [
 	path.join('./views/front'),
