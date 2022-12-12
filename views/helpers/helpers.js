@@ -19,3 +19,31 @@ hbs.registerHelper('dolarApeso', precio => {
     let totalPesos = dolar * precio
     return new Intl.NumberFormat('es-AR',{style: 'currency', currency: 'ARS'}).format(totalPesos)
 })
+
+hbs.registerHelper('listado', texto => {
+    // console.log(texto)
+    let arr = texto.split(",")
+    console.log(arr)
+    let html = "<ul>"
+
+    /*
+     <ul>
+        <li>intel i5</li>
+        <li>8gb ram</li>
+    */
+    for (item of arr) {
+        html += `<li> ${item} </li>`
+    }
+
+    html += "</ul>"
+    return html
+})
+
+hbs.registerHelper('check', valor => {
+
+    if (valor == '1') { 
+        return `<input type="checkbox" name="destacado" value="1" disabled checked>`
+    }
+    return `<input type="checkbox" name="destacado" value="0" disabled>`
+
+})
