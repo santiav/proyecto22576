@@ -6,6 +6,7 @@ const {   adminGET,
     editarProductoGET,
     editarProductoPOST,
     borrarProducto,
+    loginPOST,
     loginGET
 } = require('../controllers/back.js')
 
@@ -20,5 +21,6 @@ router.post('/editar-producto/:id', editarProductoPOST)
 
 router.get('/borrar/:id', borrarProducto)
 router.get('/login', loginGET)
+router.post('/login', loginPOST)
 
 module.exports = router;

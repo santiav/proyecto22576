@@ -4,20 +4,32 @@ const db = require('../models/connection.js');
 
 const adminGET = (req, res) => {
 
-	let sql = "SELECT * FROM productos"
+	let logueado = req.session.logueado
+	if (logueado) {
+		let sql = "SELECT * FROM productos"
 
-	db.query(sql, (err, data) => {
-		if (err) throw err
-		// console.log(data)
-		res.render('admin', {
-			titulo: "Panel de control",
-			productos: data
+		db.query(sql, (err, data) => {
+			if (err) throw err
+			// console.log(data)
+			res.render('admin', {
+				titulo: "Panel de control",
+				logueado: logueado,
+				usuario: req.session.nombreUsuario,
+				productos: data
+			})
 		})
-	})
-	
+	} else {
+		res.render('login', {
+            titulo: "Login",
+            error: "Nombre de usuario o clave incorrecto(s)"
+        })
+	}
+
+
+
 }
 
-const agregarProductoGET =  (req, res) => {
+const agregarProductoGET = (req, res) => {
 	res.render('agregar-producto', {
 		titulo: "Agregar un producto"
 	})
@@ -62,7 +74,7 @@ const editarProductoGET = (req, res) => {
 
 
 
-	
+
 }
 
 const editarProductoPOST = (req, res) => {
@@ -72,7 +84,7 @@ const editarProductoPOST = (req, res) => {
 	const producto = req.body  // datos del formulario
 
 	const sql = "UPDATE productos SET ? WHERE id = ?"
-	db.query(sql, [producto, id], (err,data) => {
+	db.query(sql, [producto, id], (err, data) => {
 		if (err) throw err
 		console.log("DATA", data)
 		console.log(`${data.affectedRows} registro actualizado`);
@@ -85,7 +97,7 @@ const borrarProducto = (req, res) => {
 	const id = req.params.id // parámetro de la url
 
 	const sql = "DELETE FROM productos WHERE id = ?"
-	db.query(sql, id, (err,data) => {
+	db.query(sql, id, (err, data) => {
 		if (err) throw err
 		console.log(`${data.affectedRows} registro borrado`);
 		res.redirect('/admin');
@@ -95,16 +107,47 @@ const borrarProducto = (req, res) => {
 const loginGET = (req, res) => {
 
 	res.render('login', {
-
+		
 	})
 }
 
+const loginPOST = (req, res) => {
+	const usuario = req.body.usuario
+	const clave = req.body.clave
+
+	if (usuario && clave) { // chequea que NO estén vacios 
+		let sql = 'SELECT * FROM cuentas WHERE usuario = ? AND clave = ?'
+
+		db.query(sql, [usuario, clave], (err, data) => {
+			if (data.length > 0) {
+				console.log(req.session)
+				req.session.logueado = true; // Creamos una propiedad llamada "logueado" para que el objeto session almacene el valor "TRUE", es para usarlo en el parcial de "header"
+				req.session.nombreUsuario = usuario
+				res.redirect('/admin')
+			} else {
+				res.render('login', {
+					titulo: "Login",
+					error: "Nombre de usuario o clave incorrecto(s)"
+				})
+			}
+		})
+	} else {
+		res.render("login", {
+			titulo: "Login",
+			error: "Por favor escribe un nombre de usuario y clave"
+		})
+	}
+
+
+}
+
 module.exports = {
-    adminGET,
-    agregarProductoGET,
+	adminGET,
+	agregarProductoGET,
 	agregarProductoPOST,
-    editarProductoGET,
+	editarProductoGET,
 	editarProductoPOST,
 	borrarProducto,
-    loginGET
+	loginPOST,
+	loginGET
 }

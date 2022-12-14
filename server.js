@@ -2,12 +2,22 @@ const express = require('express')
 const app = express()
 const hbs = require('hbs');
 const path = require('path');
+const session = require('express-session')
 const rutasFront = require('./routes/front.js')
 const rutasBack = require('./routes/back.js')
 require('./views/helpers/helpers.js')
 require('dotenv').config()
 
 const port = 3000
+
+// Sesiones
+app.use(session({
+    secret: "sarasa",
+    resave: true,
+    saveUninitialized: false,
+    cookie: {maxAge: 300000} // 5 minutos
+
+}))
 
 // Para los formularios
 app.use(express.json());
