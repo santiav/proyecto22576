@@ -8,7 +8,7 @@ const adminGET = (req, res) => {
 
 	db.query(sql, (err, data) => {
 		if (err) throw err
-		console.log(data)
+		// console.log(data)
 		res.render('admin', {
 			titulo: "Panel de control",
 			productos: data
@@ -39,14 +39,50 @@ const agregarProductoPOST = (req, res) => {
 }
 
 const editarProductoGET = (req, res) => {
-	console.log("estas en editar")
-	res.render('editar-producto', {
+	// /editar/1
+	const id = req.params.id // parámetro de la url
+	console.log("PARAM ID -->", id)
 
+	const sql = "SELECT * FROM productos WHERE id = ?"
+	db.query(sql, id, (err, data) => {
+		if (err) throw err
+		console.log("DATA", data[0])
+		if (data == "") {
+			res.send(`
+				<h1>no existe producto con id ${id}</h1>
+                <a href="./admin/">Ver listado de productos</a> 		
+			`)
+		} else {
+			res.render('editar-producto', {
+				titulo: "Editar producto",
+				producto: data[0]
+			})
+		}
 	})
+
+
+
+	
+}
+
+const editarProductoPOST = (req, res) => {
+	const id = req.params.id // parámetro de la url
+	console.log("PARAM ID -->", id)
+
+	const producto = req.body  // datos del formulario
+
+	const sql = "UPDATE productos SET ? WHERE id = ?"
+	db.query(sql, [producto, id], (err,data) => {
+		if (err) throw err
+		console.log("DATA", data)
+		console.log(`${data.affectedRows} registro actualizado`);
+		res.redirect('/admin');
+	})
+
 }
 
 const loginGET = (req, res) => {
-	console.log("estas en login")
+
 	res.render('login', {
 
 	})
@@ -57,5 +93,6 @@ module.exports = {
     agregarProductoGET,
 	agregarProductoPOST,
     editarProductoGET,
+	editarProductoPOST,
     loginGET
 }

@@ -8,7 +8,7 @@ const indexGET = (req, res) => {
 
 	db.query(sql, (err, data) => {
 		if (err) throw err
-		console.log(data)
+		// console.log(data)
 		res.render('index', {
 			titulo: "Mi página web",
 			productos: data
@@ -34,7 +34,7 @@ const contactoPOST = (req, res) => {
 
 	// Tomo información del formulario
 	let data = req.body
-	console.log(data)
+	// console.log(data)
 
 	// Indico el servicio de EMAIL
 	const transporter = nodemailer.createTransport({
@@ -60,7 +60,7 @@ const contactoPOST = (req, res) => {
 	// envia el email
 	transporter.sendMail(mailOptions,  (error, info) => {
         if (error) {
-            console.log(error)
+           // console.log(error)
             res.status(500, error.message)
             res.status(500).render('contacto', {
                 mensaje: `Ha ocurrido el siguiente error ${error.message}`,
