@@ -34,35 +34,42 @@
 
                             <div class="mb-3 col-12 col-md-3">
                                 <label for="stock" class="form-label">Stock</label>
-                                <input type="number" class="form-control" id="stock" name="stock" value={{producto.stock}} required>
+                                <input type="number" class="form-control" id="stock" name="stock"
+                                    value={{producto.stock}} required>
                             </div>
 
                             <div class="mb-3 col-12 col-md-1">
                                 <label for="destacado" class="form-check-label">D</label>
                                 {{#if producto.destacado}}
-                                    <input type="checkbox" name="destacado" id="destacado" class="form-check-input" value="1" checked>
+                                    <input type="checkbox" name="destacado" id="destacado" class="form-check-input"
+                                        value="1" checked>
                                 {{else}}
-                                    <input type="checkbox" name="destacado" id="destacado" class="form-check-input" value="1">
+                                    <input type="checkbox" name="destacado" id="destacado" class="form-check-input"
+                                        value="1">
                                 {{/if}}
-                                
+
                             </div>
 
 
                         </div>
 
 
-                       <!-- <div class="col-12" id="">
-                            <label for="imagenDeProducto" class="form-label btn btn-primary">Subir imagen</label>
-                            <div class="preview">
-                                <p>No hay imagen seleccionada para subir</p>
-                            </div>
-                            <input class="form-control" type="file" id="imagenDeProducto" name="imagenDeProducto"
-                                accept=".png,.jpg,.jpeg" required>
-                        </div> -->
 
-                        <div class="col-12">
-                            <label for="rutaImagen" class="form-label">Ruta de imagen</label>
-                            <input class="form-control" type="text" id="rutaImagen" name="rutaImagen" value={{producto.rutaImagen}} required>
+
+                        <div class="row">
+                            <div class="col-12 mb-3 editar" id="imagenCargada">
+                                <!--  <label for="imagen" class="form-label">Imagen</label>
+                                <img src="{{data.imagen}}" alt="" class="img-fluid">
+                                <input type="text" class="form-control" id="imagen" placeholder="Ruta de la imagen"
+                                    name="imagen" required> -->
+                                <label for="rutaImagen" class="form-label">Imagen</label>
+
+                                <img src="/uploads/x1_carbon_4_3.jpg-1654801811279.jpg" alt="" class="img-fluid">
+
+                                <!-- {{producto.rutaImagen}} -->
+
+                                <input class="form-control" type="file" id="rutaImagen" name="rutaImagen" style="display:none" accept=".png,.jpg,.jpeg">
+                            </div>
                         </div>
 
 
@@ -77,9 +84,8 @@
                             </div>
                             <div class="mb-3 col-4">
                                 <label for="caracteristicas" class="form-label">Caracteristicas</label>
-                                <textarea class="form-control" id="caracteristicas" rows="6"
-                              
-                                    name="caracteristicas"> {{producto.caracteristicas}} </textarea>
+                                <textarea class="form-control" id="caracteristicas" rows="6" name="caracteristicas">
+                                {{producto.caracteristicas}} </textarea>
                             </div>
                         </div>
                     </div>
@@ -95,7 +101,7 @@
         </div>
     </div>
 
-   {{> footer}}
+    {{> footer}}
 
     <!-- 
     Essential Scripts
@@ -108,8 +114,8 @@
 
     <script>
         // https://developer.mozilla.org/en-US/docs/Web/API/File/Using_files_from_web_applications
-        const contenedor = document.querySelector("#imagenCargada"),
-            elInput = document.querySelector("#imagenDeProducto");
+        const contenedor = document.querySelector("#imagenCargada")
+        const elInput = document.querySelector("#rutaImagen");
 
         contenedor.addEventListener("click", function (e) {
             if (elInput) {

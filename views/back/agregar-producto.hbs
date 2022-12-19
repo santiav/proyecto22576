@@ -46,19 +46,18 @@
                         </div>
 
 
-                       <!-- <div class="col-12" id="">
-                            <label for="imagenDeProducto" class="form-label btn btn-primary">Subir imagen</label>
+                        <div class="col-12">
+                            <label for="rutaImagen" class="form-label btn btn-primary">Subir imagen</label>
                             <div class="preview">
                                 <p>No hay imagen seleccionada para subir</p>
                             </div>
-                            <input class="form-control" type="file" id="imagenDeProducto" name="imagenDeProducto"
-                                accept=".png,.jpg,.jpeg" required>
-                        </div> -->
+                            <input class="form-control" type="file" id="rutaImagen" name="rutaImagen" accept=".png,.jpg,.jpeg,.gif" required>
+                        </div> 
 
-                        <div class="col-12">
+                       <!-- <div class="col-12">
                             <label for="rutaImagen" class="form-label btn btn-primary">Ruta de imagen</label>
                             <input class="form-control" type="text" id="rutaImagen" name="rutaImagen" placeholder="http://" required>
-                        </div>
+                        </div> -->
 
 
 
@@ -102,11 +101,11 @@
 
 
     <script>
-        const imagenDeProducto = document.querySelector('#imagenDeProducto');
+        const rutaImagen = document.querySelector('#rutaImagen');
         const preview = document.querySelector('.preview');
 
-        imagenDeProducto.style.opacity = 0;
-        imagenDeProducto.addEventListener('change', updateImageDisplay);
+        rutaImagen.style.opacity = 0;
+        rutaImagen.addEventListener('change', updateImageDisplay);
 
         console.log("preview.firstChild", preview.firstChild)
 
@@ -115,7 +114,7 @@
                 preview.removeChild(preview.firstChild);
             }
 
-            const curFiles = imagenDeProducto.files;
+            const curFiles = rutaImagen.files;
             console.log("curFiles: ", curFiles)
             if (curFiles.length === 0) {
                 const para = document.createElement('p');
@@ -130,6 +129,7 @@
                     const para = document.createElement('p');
                     para.textContent = `Archivo ${file.name}, tamaño ${returnFileSize(file.size)}.`;
                     const image = document.createElement('img');
+                    image.classList.add("img-fluid")
                     image.src = URL.createObjectURL(file);
 
                     listItem.appendChild(image);
